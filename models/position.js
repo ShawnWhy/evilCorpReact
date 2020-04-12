@@ -4,14 +4,20 @@ const Schema = mongoose.Schema;
 const positionSchema = new Schema({
   name: { type: String, required: true },
   
-  employees:
+  employees:[
+      {
+      type: this.schema.Types.ObjectId,
+      ref:"Employee"
+  }
+
+  ]
 
   
 });
 
-const Post = mongoose.model("Post", postSchema);
+const Position = mongoose.model("Post", positionSchema);
 
-module.exports = Post;
+module.exports = Position;
 
 
 // strengthexcs: [

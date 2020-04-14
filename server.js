@@ -17,19 +17,18 @@ app.use(routes);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/employeeReview", { useCreateIndex: true,
 useNewUrlParser: true,useUnifiedTopology: true},);
-db.Employee.remove({})
+db.Employee.deleteMany({})
 
-.then(db.Employee.create({firstName:"Shawn",lastName:"Yu",password:"password",race:"robot",position:"manager"})
-.then(db.Employee.create({firstName:"Xandor",lastName:"schmore",password:"password",race:"alien",position:"manager"})
-.then(db.Employee.create({firstName:"Lando",lastName:"Griffin",password:"password",race:"human",position:"manager"})
-.then(db.Employee.create({firstName:"George",lastName:"Stapp",password:"password",race:"human",position:"worker"})
-.then(db.Employee.create({firstName:"Gerald",lastName:"Whitcherson",password:"password",race:"alien",position:"engineer"})
-.then(db.Employee.create({firstName:"Kirstin",lastName:"Dunster",password:"password",race:"robot",position:"henchman"})
-.then(db.Employee.create({firstName:"Bardo",lastName:"Darkerstone",password:"password",race:"human",position:"designer"})
-.then(db.Employee.create({firstName:"Shyster",lastName:"Dusterton",password:"password",race:"human",position:"manager"})
-)))))))).then(dbemployees=>{
+.then(db.Employee.create({firstname:"Shawn",lastname:"Yu",password:"password",race:"robot",position:"manager"})
+.then(db.Employee.create({firstname:"Xandor",lastname:"schmore",password:"password",race:"alien",position:"manager"})
+.then(db.Employee.create({firstname:"Lando",lastname:"Griffin",password:"password",race:"human",position:"manager"})
+.then(db.Employee.create({firstname:"George",lastname:"Stapp",password:"password",race:"human",position:"worker"})
+.then(db.Employee.create({firstname:"Gerald",lastname:"Whitcherson",password:"password",race:"alien",position:"engineer"})
+.then(db.Employee.create({firstname:"Kirstin",lastname:"Dunster",password:"password",race:"robot",position:"henchman"})
+.then(db.Employee.create({firstname:"Bardo",lastname:"Darkerstone",password:"password",race:"human",position:"designer"})
+.then(db.Employee.create({firstname:"Shyster",lastname:"Dusterton",password:"password",race:"human",position:"manager"})
+)))))))).then(dbemployees=>
     console.log(dbemployees)
-    process.exit(0)}
 ).catch(err=>console.log(err))
 
 // Start the API server

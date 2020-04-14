@@ -1,0 +1,14 @@
+.employee{
+    border:4px solid grey;
+    float:right;
+    background-color:lightgrey
+
+}
+
+.manager{
+    border:4px solid goldenrod;
+    float:right;
+    background-color:yellow
+
+
+}

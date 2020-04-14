@@ -7,17 +7,21 @@ router.route("/employees")
   .get(employeeController.findAllSortByLastName)
   .post(employeeController.create);
 
+router.route("/login")
+.post(employeeController.findOneEmployee)
+router.route("/employee/:id")
+.delete(employeeController.deleteOne)
+
   router.route("/managers")
   .get(employeeController.findAllManagers);
-  
-  router.get("/employees/date",employeeController.findAllSortByDate);
-//   router.get("/api/")
 
-router
-  .route("/api/employees/:id")
-  .get(employeeController.findById)
-  .put(employeeController.update)
-  .delete(employeeController.remove);
+  router.route("/employeesPosition")
+  .get(employeeController.findAllSortByPosition);
+
+  router.route("/employeesDate")
+  .get(employeeController.findAllSortByDate);
+  
+
 
 module.exports = router;
 

@@ -5,14 +5,14 @@ module.exports = {
   findAllSortByDate: function(req, res) {
     db.Employee
       .find({})
-      .sort({ date: -1 })
+      .sort({ hireddate: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findAllSortByLastName: function(req, res) {
       db.Employee
         .find({})
-        // .sort({lastName: 1 })
+        .sort({lastname: 1 })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
@@ -23,11 +23,25 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
-    findAllManagers: function(req,res){
+    findAllManagers: function(req, res){
       db.Employee.find({position:"manager"})
-      .sort({lastName: -1 })
+      .sort({lastname: 1 })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
+    },
+  findOneEmployee: function(req, res){
+    console.log(req.body);
+    db.Employee.findOne(req.body)
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
+
+    deleteOne:function(req, res){
+      console.log(req.params.id)
+      db.Employee.findByIdAndDelete({_id:req.params.id})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+      
     },
   findById: function(req, res) {
     db.Employee
@@ -36,6 +50,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    console.log(req.body);
     db.Employee
       .create(req.body)
       .then(dbModel => res.json(dbModel))

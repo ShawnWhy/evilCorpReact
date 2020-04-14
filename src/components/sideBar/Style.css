@@ -1,0 +1,26 @@
+
+input{
+    float:left;
+    clear:both
+
+}
+.loginButton{
+    float:left;
+    clear:both
+}
+
+.smallText{
+    font-size: x-small;
+    float:left;
+    clear:both
+
+}
+
+.employeeHire{
+    visibility: hidden;
+}
+
+.managerHire{
+    color:goldenrod
+    
+}

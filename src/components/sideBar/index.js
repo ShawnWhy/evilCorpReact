@@ -1,4 +1,5 @@
 import React from "react";
+import "./Style.css"
 
 
 
@@ -6,41 +7,48 @@ function SideBar(props){
 
 
     return(
-<div>
+<div >
     <div>
-        hello {props.meFirstName} {props.meLastName}, our wonderful {props.meTitle}
+        hello {props.meFirstname} {props.meLastname}, our wonderful {props.mePosition}
     </div>
     <div>
         <input 
         type="text"
-         name="firstName"
-         placeholder="firstame"
-         onChange={props.handleInputchange}
+         name="firstname"
+         placeholder="firstname"
+         onChange={props.handleInputChange}
          />
         
         <input 
         type="text"
-         name="lastName"
+         name="lastname"
          placeholder="lastname"
-         onChange={props.handleInputchange}
+         onChange={props.handleInputChange}
           />
-          </div>
+          
           <input 
         type="text"
          name="password"
          placeholder="password"
          onChange={props.handleInputChange}
           />
-          <button
-          onClick = {props.handleSubmit}
+        <input 
+        type="text"
+         name="position"
+         placeholder="position"
+         onChange={props.handleInputChange}
+          />
+          </div>
+          <button className="loginButton"
+          onClick = {props.handleLogin}>
           
-          ></button>
-          {props.children}
-
-         
-        
-
+          login</button>
+           <button className={"loginButton "+ (props.mePosition==="manager"? "managerHire":"employeeHire")}
+          onClick = {props.handleHire}> hire</button>
+          <div className="smallText">employee Information</div>
+          <div className="smallText">{props.loginfirstname},{props.loginlastname},{props.loginPosition}</div>
 </div>
+
 
 
     )

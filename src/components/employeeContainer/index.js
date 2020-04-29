@@ -1,5 +1,7 @@
 /* eslint-disable no-lone-blocks */
 import React, { useEffect, useState } from "react";
+import Moment from 'react-moment';
+// import 'moment-timezone';
 import API from "../../util/API";
 import EmployeeCard from "../employee card/index"
 import  SideBar from "../sideBar/index";
@@ -151,11 +153,11 @@ setSort(event.target.value)
   // Handles updating component state when the user types into the input field
   function handleInputChange(event) {
     const { name, value } = event.target;
-    console.log(name, value);
+    // console.log(name, value);
     setLogin({...login, [name]: value})
   };
 
-  // When the form is submitted, use the API.saveBook method to save the book data
+  // When the form is submitFconted, use the API.saveBook method to save the book data
   // Then reload books from the database
   function handleLogin() {
     console.log("login");

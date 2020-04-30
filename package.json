@@ -6,6 +6,7 @@
   },
   "private": true,
   "secure": false,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",

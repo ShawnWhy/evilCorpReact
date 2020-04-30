@@ -13,7 +13,7 @@
     "express": "^4.17.1",
     "express-routes": "0.0.2",
     "moment": "^2.24.0",
-    "mongoose": "^5.9.7",
+    "mongoose": "^5.9.7"
    
   }
 }

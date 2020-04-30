@@ -9,11 +9,19 @@ const db = require("./models");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("./public"));
-  
-}
+
+  app.use(express.static("build"));
+
+
+  app.get("*", (req, res) => {
+       res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+   });
+
+ }
 // Add routes, both API and view
 app.use(routes);
+
+
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/employeeReview", { useCreateIndex: true,

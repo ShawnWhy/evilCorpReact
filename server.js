@@ -4,6 +4,7 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const db = require("./models");
+const path = require("path");
 
 
 app.use(express.urlencoded({ extended: true }));

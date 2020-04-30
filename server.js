@@ -8,19 +8,9 @@ const db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-if (process.env.NODE_ENV === "production") {
 
-  app.use(express.static("build"));
-
-
-  app.get("*", (req, res) => {
-       res.sendFile(path.resolve(__dirname,  "build", "index.html"));
-   });
-
- }
 // Add routes, both API and view
 app.use(routes);
-
 
 
 // Connect to the Mongo DB
@@ -39,6 +29,27 @@ db.Employee.deleteMany({})
 )))))))).then(dbemployees=>
     console.log(dbemployees)
 ).catch(err=>console.log(err))
+
+
+if (process.env.NODE_ENV === "production") {
+
+  app.use(express.static("build"));
+
+
+  app.get("*", (req, res) => {
+       res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+   });
+
+ }
+ app.use(express.static("build"));
+
+
+ app.get("*", (req, res) => {
+      res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+  });
+
+
+
 
 // Start the API server
 app.listen(PORT, function() {

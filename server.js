@@ -13,6 +13,17 @@ app.use(express.json());
 // Add routes, both API and view
 app.use(routes);
 
+if (process.env.NODE_ENV === "production") {
+
+  app.use(express.static("src/build"));
+
+
+  app.get("*", (req, res) => {
+       res.sendFile(path.join(__dirname,  "src/build", "index.html"));
+   });
+
+ }
+
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/employeeReview", { useCreateIndex: true,
@@ -32,23 +43,8 @@ db.Employee.deleteMany({})
 ).catch(err=>console.log(err))
 
 
-// if (process.env.NODE_ENV === "production") {
-
-//   app.use(express.static("build"));
 
 
-//   app.get("*", (req, res) => {
-//        res.sendFile(path.resolve(__dirname,  "build", "index.html"));
-//    });
-
-//  }
- app.use(express.static("build"));
-
-
-//  app.get("/", (req, res) => {
-//       res.sendFile(path.resolve(
-//         __dirname,  "build", "index.html"));
-//   });
 
 
 

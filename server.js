@@ -13,7 +13,7 @@ app.use(express.json());
 // Add routes, both API and view
 app.use(routes);
 
-if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
 
   app.use(express.static("src/build"));
 
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "production") {
        res.sendFile(path.join(__dirname,  "src/build", "index.html"));
    });
 
- }
+//  }
 
 
 // Connect to the Mongo DB

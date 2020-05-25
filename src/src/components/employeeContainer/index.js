@@ -1,7 +1,4 @@
-/* eslint-disable no-lone-blocks */
 import React, { useEffect, useState } from "react";
-import Moment from 'react-moment';
-// import 'moment-timezone';
 import API from "../../util/API";
 import EmployeeCard from "../employee card/index"
 import  SideBar from "../sideBar/index";
@@ -10,33 +7,42 @@ import  "./Style.css"
 
 function EmployeeContainer() {
   // Setting our component's initial state
+  //setting up a series of mock workers to be replaced later 
   const [employees, setEmployees] = useState([
-
-
   {firstname:"shiawn",lastname:"Yu",password:"password",race:"robot",position:"manager"},
-  {firstname:"shit",lastname:"ass",password:"password",race:"robot",position:"manager"},
-  {firstname:"boot",lastname:"crap",password:"password",race:"robot",position:"manager"},
+  {firstname:"das",lastname:"boot",password:"password",race:"robot",position:"manager"},
+  {firstname:"boot",lastname:"camp",password:"password",race:"robot",position:"manager"},
   ])
+
+  //information to be submitted
   const [login, setLogin] = useState({
     firstname:"",
     lastname:"",
     position:"",
     password:""
   })
+
+  //user information
   const [me, setMe] = useState({
     firstname:"Puny",
     lastname:"human",
     position:"manager"
     })
+  
+  //alert errors
   const[alert, setAlert] = useState({
-    backgroundColor:"",
-    message:""
+    backgroundColor:"white",
+    message:"hello"
     })
 
+  //an value to use as ways to sort the employees
   const[sort, setSort]=useState(
       "sortByLastName"
     )
   
+  //load employees everytime the page loads.
+  //this will also trigger if the "sort" value
+  //changes
   useEffect(() => {
     loadEmployees()
    
@@ -47,7 +53,7 @@ function EmployeeContainer() {
   }, [sort]);
 
  
- 
+//load the employee list based on the value of "sort"
 function loadEmployeesTwo(res){
   var employeeList = res.data
   var newEmployeeList = [];
@@ -85,27 +91,26 @@ function loadEmployeesTwo(res){
 
 }
 
-
+//load the employees based on the value of "sort"
 function loadEmployees() {
-  console.log("sorting")
+  // console.log("sorting")
+
   switch(sort){
+
    case "sortByLastName":
     console.log("loadingbylastname")
-
     API.getAllEmployees()
     .then(res => loadEmployeesTwo(res));
     break;
 
     case "sortByPosition":
       console.log("loadingbyposition")
-
       API.getAllEmployeesPositionSort()
       .then(res=> loadEmployeesTwo(res));
       break;
 
     case "sortByDate":
       console.log("loadingbudate")
-
       API.getAllEmployeesDateSort()
       .then(res=> loadEmployeesTwo(res));
       break;
@@ -120,23 +125,24 @@ function loadEmployees() {
   }
 }
 
+//changes the value of "sort" based on the selected choice
 function handleChangeSort(event){
 setSort(event.target.value)
 
 }
    
-      
-    
-
-  // Deletes a book from the database with a given id, then reloads books from the db
-  function fireEmployee(event) {
+//deletes an employee from the database
+function fireEmployee(event) {
     var deleteid=event.target.getAttribute("keyid");
     console.log(deleteid)
     API.fireEmployee(deleteid)
       .then(res => loadEmployees())
       .catch(err => console.log(err));
   }
-  function handleHire(event){
+
+
+//add an employee to the database
+ function handleHire(event){
     event.preventDefault();
     API.hireEmployee({
       firstname: login.firstname,
@@ -150,15 +156,14 @@ setSort(event.target.value)
 
   }
 
-  // Handles updating component state when the user types into the input field
+//handles the name and password change
   function handleInputChange(event) {
     const { name, value } = event.target;
     // console.log(name, value);
     setLogin({...login, [name]: value})
   };
 
-  // When the form is submitFconted, use the API.saveBook method to save the book data
-  // Then reload books from the database
+ //sets the userinformation to that of the one logged in
   function handleLogin() {
     console.log("login");
     if (login.firstname && login.lastname && login.password) {
@@ -169,29 +174,31 @@ setSort(event.target.value)
       })
       .then((data)=> {
         console.log(data);
+      // the "me" value is used as user information
       setMe({
         firstname:data.data.firstname,
         lastname:data.data.lastname,
         position:data.data.position
       })})
+      //gets rid of the information used for login
         .then(() => setLogin({
           firstname: "",
           lastname: "",
           password: ""
         }))
         .catch(err => {
-          
+          //alert message
+          console.log("alert");
           setAlert({
             backgroundColor:"red",
             message:"can't find you my friend"
 
           });
-          setTimeout(setAlert({
+          setTimeout(function(){setAlert({
             backgroundColor:"white",
-            message:""}),1000
-
-
-          )} );
+            message:""})},2000
+            )
+          });
     }
   };
 
@@ -209,6 +216,8 @@ setSort(event.target.value)
         loginfirstname={login.firstname}
         loginlastname={login.lastname}
         loginPosition={login.position}
+        alertbackgroundColor={alert.backgroundColor}
+        alertmessage={alert.message}
         
         />
        
@@ -216,7 +225,6 @@ setSort(event.target.value)
         
         
         </div>
-        {/* {"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')} */}
       
        <div className= {"col-md-6 "+(me.position==="manager"? 'manager':'employee' )}>
          <div>
@@ -253,10 +261,6 @@ setSort(event.target.value)
        </div>
      </div>
      </div>
-
-
-    );
-  }
-
+)}
 
 export default EmployeeContainer;

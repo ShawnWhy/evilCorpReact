@@ -8,22 +8,10 @@ const positionSchema = new Schema({
       {
       type: this.schema.Types.ObjectId,
       ref:"Employee"
-  }
-
-  ]
-
-  
+      }
+    ]
 });
-
 const Position = mongoose.model("Post", positionSchema);
-
 module.exports = Position;
 
 
-// strengthexcs: [
-//     {
-//       type: Schema.Types.ObjectId,
-//       ref: "StrengthExc"
-//     }
-//   ]
-// });

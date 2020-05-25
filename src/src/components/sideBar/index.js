@@ -47,11 +47,9 @@ function SideBar(props){
           onClick = {props.handleHire}> hire</button>
           <div className="smallText">employee Information</div>
           <div className="smallText">{props.loginfirstname},{props.loginlastname},{props.loginPosition}</div>
+
+          <div className={props.alertbackgroundColor+" smallText"}>{props.alertmessage}</div>
 </div>
-
-
-
-    )
-};
+)};
 
 export default SideBar;
